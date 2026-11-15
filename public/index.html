@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6d3a8a">
+  <title>Dental Radiology Reporting</title>
+  <link rel="stylesheet" href="/styles.css?v=4">
+</head>
+<body>
+  <div id="toastRegion" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+  <main id="loginView" class="login-page">
+    <section class="login-brand" aria-labelledby="clinicName">
+      <div id="loginLogo" class="brand-logo brand-logo--large" aria-label="Clinic logo">
+        <img id="loginLogoImage" alt="Clinic logo" hidden>
+        <span id="loginLogoFallback" aria-hidden="true">M</span>
+      </div>
+      <p class="eyebrow" id="loginCenter">Oral &amp; Maxillofacial Radiology Center</p>
+      <h1 id="clinicName">Dr. Mahjube Entezar-e-Ghaem</h1>
+      <p class="professional-title" id="loginTitle">Oral &amp; Maxillofacial Radiologist</p>
+      <div class="brand-rule" aria-hidden="true"></div>
+      <p class="login-intro">Secure clinical reporting for panoramic, bitewing, and periapical examinations.</p>
+      <div class="clinical-visual" aria-hidden="true">
+        <div class="clinical-visual__screen">
+          <svg viewBox="0 0 420 240" role="presentation">
+            <defs><linearGradient id="screenGlow" x1="0" x2="1"><stop stop-color="#6d3a8a"/><stop offset="1" stop-color="#68aa89"/></linearGradient></defs>
+            <rect x="8" y="8" width="404" height="224" rx="22" fill="#17151c" stroke="url(#screenGlow)" stroke-width="3"/>
+            <path d="M62 140 C90 70 148 42 210 42 C272 42 330 70 358 140" fill="none" stroke="#bdb5c6" stroke-width="5" opacity=".52"/>
+            <path d="M70 153 C106 202 160 215 210 215 C260 215 314 202 350 153" fill="none" stroke="#98b9a9" stroke-width="4" opacity=".42"/>
+            <g fill="#f3eff6" opacity=".74">
+              <ellipse cx="92" cy="125" rx="13" ry="24"/><ellipse cx="124" cy="92" rx="12" ry="25"/><ellipse cx="159" cy="70" rx="11" ry="24"/><ellipse cx="193" cy="59" rx="10" ry="23"/>
+              <ellipse cx="227" cy="59" rx="10" ry="23"/><ellipse cx="261" cy="70" rx="11" ry="24"/><ellipse cx="296" cy="92" rx="12" ry="25"/><ellipse cx="328" cy="125" rx="13" ry="24"/>
+            </g>
+            <g fill="#c7ddd2" opacity=".58">
+              <ellipse cx="95" cy="161" rx="13" ry="23"/><ellipse cx="129" cy="184" rx="12" ry="24"/><ellipse cx="164" cy="197" rx="11" ry="23"/><ellipse cx="195" cy="203" rx="10" ry="22"/>
+              <ellipse cx="225" cy="203" rx="10" ry="22"/><ellipse cx="256" cy="197" rx="11" ry="23"/><ellipse cx="291" cy="184" rx="12" ry="24"/><ellipse cx="325" cy="161" rx="13" ry="23"/>
+            </g>
+            <circle cx="210" cy="128" r="38" fill="none" stroke="#78c49d" stroke-width="2" stroke-dasharray="5 6" opacity=".66"/>
+            <path d="M210 99v58M181 128h58" stroke="#9d7bb1" stroke-width="1.5" opacity=".8"/>
+          </svg>
+        </div>
+        <div class="clinical-visual__badge"><span></span> Protected clinical workspace</div>
+      </div>
+    </section>
+    <section class="login-card" aria-labelledby="signInHeading">
+      <p class="eyebrow">Protected clinical workspace</p>
+      <h2 id="signInHeading">Sign in</h2>
+      <p id="authIntro" class="muted">Access patient examinations and saved reports.</p>
+      <form id="loginForm" class="stack-form">
+        <label>Username<input name="username" autocomplete="username" required></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+        <p id="loginError" class="form-error" role="alert" hidden></p>
+        <button class="button button--primary button--wide" type="submit">Sign in</button>
+      </form>
+      <form id="setupForm" class="stack-form" hidden>
+        <label>Administrator username<input name="username" autocomplete="username" minlength="3" maxlength="64" required></label>
+        <label>Administrator password<input name="password" type="password" autocomplete="new-password" minlength="12" required></label>
+        <label>Confirm password<input name="confirmation" type="password" autocomplete="new-password" minlength="12" required></label>
+        <p class="setup-notice">This one-time setup is available only on this computer. Public self-registration remains disabled.</p>
+        <p id="setupError" class="form-error" role="alert" hidden></p>
+        <button class="button button--primary button--wide" type="submit">Create administrator &amp; continue</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="appView" class="app-shell" hidden>
+    <header class="topbar">
+      <button id="homeButton" class="brand-button" type="button" aria-label="Go to examinations">
+        <span class="brand-logo brand-logo--small">
+          <img id="appLogoImage" alt="Clinic logo" hidden>
+          <span id="appLogoFallback" aria-hidden="true">M</span>
+        </span>
+        <span><strong id="appClinicName">Dr. Mahjube Entezar-e-Ghaem</strong><small>Radiology reporting</small></span>
+      </button>
+      <nav class="topbar-actions" aria-label="Primary navigation">
+        <button id="newExamButton" class="button button--primary" type="button">New examination</button>
+        <button id="reportsButton" class="button button--quiet" type="button">Saved reports</button>
+        <button id="settingsButton" class="icon-button" type="button" aria-label="Clinic settings" title="Clinic settings">⚙</button>
+        <button id="logoutButton" class="button button--ghost" type="button">Log out</button>
+      </nav>
+    </header>
+
+    <main class="app-main">
+      <section id="entryView" class="page-view">
+        <ol class="workflow-progress workflow-progress--seven" aria-label="Reporting workflow">
+          <li data-progress-step="1" class="is-current"><span>1</span><strong>Patient</strong></li>
+          <li data-progress-step="2"><span>2</span><strong>History</strong></li>
+          <li data-progress-step="3"><span>3</span><strong>Imaging</strong></li>
+          <li data-progress-step="4"><span>4</span><strong>Findings</strong></li>
+          <li data-progress-step="5"><span>5</span><strong>Images</strong></li>
+          <li data-progress-step="6"><span>6</span><strong>Review</strong></li>
+          <li data-progress-step="7"><span>7</span><strong>PDF</strong></li>
+        </ol>
+        <div class="page-heading">
+          <div><p id="entryStepLabel" class="eyebrow">Step 1 of 7 · New examination</p><h1 id="entryStepHeading">Patient information</h1></div>
+          <p id="entryStepDescription">Create a complete patient record before continuing to clinical history.</p>
+        </div>
+        <form id="patientForm" class="entry-card">
+          <section data-entry-step="1">
+            <div class="form-section-heading"><span>01</span><div><h2>Patient information</h2><p>Identity, contact and examination details</p></div></div>
+            <div class="form-grid form-grid--3">
+              <label>First name <span class="required">Required</span><input name="firstName" required autocomplete="off"></label>
+              <label>Last name <span class="required">Required</span><input name="lastName" required autocomplete="off"></label>
+              <label>Patient ID / file number<input name="id" autocomplete="off"></label>
+              <label>Date of birth<input name="birthDate" type="date"></label>
+              <label>Age<input name="age" inputmode="numeric" min="0" max="130" type="number"></label>
+              <label>Sex<select name="sex"><option value="">Not recorded</option><option>Female</option><option>Male</option><option>Other / not specified</option></select></label>
+              <label>Telephone<input name="phone" type="tel" autocomplete="tel"></label>
+              <label>Examination date <span class="required">Required</span><input name="date" type="date" required></label>
+              <label>Referring clinician <span class="optional">Optional</span><input name="referringClinician" autocomplete="off"></label>
+              <label class="span-3">Additional patient notes<textarea name="additionalNotes" rows="3" placeholder="Optional administrative or referral notes…"></textarea></label>
+            </div>
+          </section>
+          <section data-entry-step="2" hidden>
+            <div class="form-section-heading"><span>02</span><div><h2>Clinical history</h2><p>Record only information provided by the patient or referring clinician.</p></div></div>
+            <fieldset class="history-flags"><legend>Common medical factors</legend><div class="checkbox-grid">
+              <label><input type="checkbox" name="pregnancy"> Pregnancy</label>
+              <label><input type="checkbox" name="diabetes"> Diabetes</label>
+              <label><input type="checkbox" name="hypertension"> Hypertension</label>
+              <label><input type="checkbox" name="cardiacDisease"> Cardiac disease</label>
+              <label><input type="checkbox" name="bleedingDisorder"> Bleeding disorder</label>
+              <label><input type="checkbox" name="malignancy"> Malignancy</label>
+              <label><input type="checkbox" name="radiotherapy"> Previous radiotherapy</label>
+            </div></fieldset>
+            <div class="form-grid form-grid--2 history-grid">
+              <label>Chief complaint / reason for referral<textarea name="chiefComplaint" rows="3" placeholder="Patient complaint or referral reason…"></textarea></label>
+              <label>Clinical indication<textarea name="clinicalIndication" rows="3" placeholder="Question to be evaluated radiographically…"></textarea></label>
+              <label>Relevant dental history<textarea name="dentalHistory" rows="3" placeholder="Previous dental treatment or trauma…"></textarea></label>
+              <label>Relevant medical history<textarea name="medicalHistory" rows="3" placeholder="Relevant conditions…"></textarea></label>
+              <label>Surgical history<textarea name="surgicalHistory" rows="3" placeholder="Previous surgery…"></textarea></label>
+              <label>Current medications<textarea name="medications" rows="3" placeholder="Medication names and doses if known…"></textarea></label>
+              <label>Allergies<textarea name="allergies" rows="3" placeholder="Known allergies…"></textarea></label>
+              <label>Symptoms and duration<textarea name="symptoms" rows="3" placeholder="Pain, swelling, duration, location…"></textarea></label>
+              <label>Previous imaging / comparison<textarea name="previousImaging" rows="3" placeholder="Prior examinations and dates…"></textarea></label>
+              <label>Additional history notes<textarea name="historyNotes" rows="3" placeholder="Other relevant history…"></textarea></label>
+            </div>
+          </section>
+          <section data-entry-step="3" hidden>
+            <div class="form-section-heading"><span>03</span><div><h2>Examination modalities</h2><p>Select every modality and record its side.</p></div></div>
+            <fieldset class="modality-fieldset">
+              <legend>Examination modalities <span class="required">Select at least one</span></legend>
+              <div id="entryModalities" class="choice-grid choice-grid--4"></div>
+            </fieldset>
+          </section>
+          <p id="patientFormError" class="form-error" role="alert" hidden></p>
+          <div class="form-actions form-actions--between">
+            <button id="entryPreviousButton" class="button button--quiet" type="button" hidden>← Previous</button>
+            <button id="entryNextButton" class="button button--primary button--large" type="button">Next <span aria-hidden="true">→</span></button>
+            <button id="entrySubmitButton" class="button button--primary button--large" type="submit" hidden>Save &amp; open findings <span aria-hidden="true">→</span></button>
+          </div>
+        </form>
+      </section>
+
+      <section id="reportsView" class="page-view" hidden>
+        <div class="page-heading page-heading--row">
+          <div><p class="eyebrow">Patient records</p><h1>Saved reports</h1></div>
+          <div class="report-filters"><label class="search-field"><span class="sr-only">Search patients</span><input id="reportSearch" type="search" placeholder="Search patient or file number…"></label><label><span class="sr-only">Status</span><select id="reportStatusFilter"><option value="">All statuses</option><option value="draft">Draft</option><option value="final">Final</option></select></label><label><span class="sr-only">Examination date</span><input id="reportDateFilter" type="date"></label></div>
+        </div>
+        <div id="reportList" class="report-list"></div>
+      </section>
+
+      <section id="settingsView" class="page-view" hidden>
+        <div class="page-heading"><div><p class="eyebrow">Administration</p><h1>Clinic settings</h1></div><p>These details appear on the login page and every generated report.</p></div>
+        <form id="settingsForm" class="entry-card" enctype="multipart/form-data">
+          <div class="settings-layout">
+            <div class="logo-uploader">
+              <div class="brand-logo brand-logo--settings"><img id="settingsLogoImage" alt="Current clinic logo" hidden><span id="settingsLogoFallback">M</span></div>
+              <label class="button button--quiet" for="logoInput">Upload original logo</label>
+              <input id="logoInput" name="logo" type="file" accept="image/png,image/jpeg" hidden>
+              <p class="microcopy">PNG or JPEG, up to 5 MB. The image is preserved without cropping or redrawing.</p>
+            </div>
+            <div class="form-grid form-grid--2">
+              <label>Clinician name<input name="clinicianName" required></label>
+              <label>Professional title<input name="professionalTitle" required></label>
+              <label class="span-2">Center descriptor<input name="centerDescriptor" required></label>
+              <label class="span-2">Address<textarea name="address" rows="2" required></textarea></label>
+              <label>Telephone<input name="telephone" required></label>
+              <label>Email<input name="email" type="email"></label>
+              <label>Medical registration number<input name="registrationNumber"></label>
+              <label>Website<input name="website"></label>
+              <label class="span-2">Report footer<textarea name="footerText" rows="2" placeholder="Confidential clinical report"></textarea></label>
+            </div>
+          </div>
+          <div class="form-actions"><button class="button button--primary" type="submit">Save clinic settings</button></div>
+        </form>
+      </section>
+
+      <section id="workspaceView" class="page-view page-view--wide" hidden>
+        <ol class="workflow-progress workflow-progress--seven workflow-progress--workspace" aria-label="Reporting workflow">
+          <li data-progress-step="1" class="is-complete"><span>✓</span><strong>Patient</strong></li>
+          <li data-progress-step="2" class="is-complete"><span>✓</span><strong>History</strong></li>
+          <li data-progress-step="3" class="is-complete"><span>✓</span><strong>Imaging</strong></li>
+          <li data-progress-step="4" class="is-current"><span>4</span><strong>Findings</strong></li>
+          <li data-progress-step="5"><span>5</span><strong>Images</strong></li>
+          <li data-progress-step="6"><span>6</span><strong>Review</strong></li>
+          <li data-progress-step="7"><span>7</span><strong>PDF</strong></li>
+        </ol>
+        <header class="patient-strip">
+          <div><p class="eyebrow">Current examination</p><h1 id="workspacePatientName">Patient</h1><p id="workspacePatientMeta" class="muted"></p></div>
+          <div id="workspaceModalities" class="tag-row"></div>
+          <div class="patient-strip-actions">
+            <span id="saveIndicator" class="save-indicator" aria-live="polite">Not saved</span>
+            <button id="editPatientButton" class="button button--quiet" type="button">Edit patient details</button>
+          </div>
+        </header>
+
+        <nav id="reportModeTabs" class="report-mode-tabs" aria-label="Selected report sections"></nav>
+
+        <div class="workspace-grid">
+          <section class="workspace-card image-panel" data-workspace-step="5" aria-labelledby="imagesHeading" hidden>
+            <div class="section-heading"><div><p class="section-kicker">Review</p><h2 id="imagesHeading">Radiographs</h2></div><div id="imageModalityTabs" class="mini-tabs" role="tablist"></div></div>
+            <div class="image-toolbar">
+              <label class="button button--primary button--small" for="imageInput">Add images</label>
+              <input id="imageInput" type="file" accept="image/jpeg,image/png" multiple hidden>
+              <button id="zoomOutButton" class="icon-button" type="button" title="Zoom out" aria-label="Zoom out">−</button>
+              <button id="zoomInButton" class="icon-button" type="button" title="Zoom in" aria-label="Zoom in">+</button>
+              <button id="fitImageButton" class="button button--quiet button--small" type="button">Fit</button>
+              <button id="resetImageButton" class="button button--quiet button--small" type="button">Reset</button>
+            </div>
+            <div id="imageViewer" class="image-viewer" tabindex="0" aria-label="Radiograph viewer. Drag to pan after zooming.">
+              <img id="viewerImage" alt="Selected radiograph" draggable="false" hidden>
+              <div id="viewerEmpty" class="viewer-empty"><span aria-hidden="true">▧</span><strong>No image selected</strong><small>Upload JPEG or PNG radiographs for clinical review.</small></div>
+            </div>
+            <div id="imageThumbnails" class="thumbnail-strip" aria-label="Uploaded images"></div>
+            <p class="privacy-note">Images remain in the protected clinic storage and are never analyzed automatically.</p>
+          </section>
+
+          <section class="workspace-card chart-panel" data-workspace-step="4" data-report-mode="dental" aria-labelledby="chartHeading">
+            <div class="section-heading section-heading--wrap">
+              <div><p class="section-kicker">Select teeth</p><h2 id="chartHeading">Dental chart</h2></div>
+              <div class="segmented-control" aria-label="Dentition mode">
+                <button type="button" data-chart-mode="permanent">Permanent</button>
+                <button type="button" data-chart-mode="mixed">Primary / mixed</button>
+              </div>
+              <button id="configureChartButton" class="button button--quiet button--small" type="button">Configure teeth</button>
+            </div>
+            <div class="orientation-bar"><span>Patient right · viewer left</span><strong>Four-quadrant clinician view</strong><span>Patient left · viewer right</span></div>
+            <div id="dentalChart" class="dental-chart"></div>
+            <div class="chart-legend"><span><i class="legend-swatch legend-swatch--selected"></i> Selected for active finding</span><span><i class="legend-swatch legend-swatch--unerupted"></i> Unerupted / developing</span><span>Permanent: 1–8 per quadrant</span><span>Primary: A–E per quadrant</span></div>
+          </section>
+
+          <aside class="workspace-card finding-panel" data-workspace-step="4" data-report-mode="dental" aria-labelledby="findingHeading">
+            <div class="section-heading"><div><p class="section-kicker">Record findings</p><h2 id="findingHeading">Active finding</h2></div></div>
+            <div id="findingButtons" class="finding-list"></div>
+            <div id="activeFindingEditor" class="active-finding-editor"></div>
+          </aside>
+        </div>
+
+        <section id="manualReportPanel" class="workspace-card manual-report-panel" data-workspace-step="4" hidden></section>
+
+        <div class="lower-grid" data-workspace-step="4" data-report-mode="dental">
+          <section class="workspace-card" aria-labelledby="otherHeading">
+            <div class="section-heading"><div><p class="section-kicker">Additional observations</p><h2 id="otherHeading">Other findings</h2></div></div>
+            <div id="sideFindingGroups" class="accordion-stack"></div>
+            <div class="toggle-section">
+              <label class="toggle-row"><input id="osseousToggle" type="checkbox"><span><strong>Osseous fracture</strong><small>Record a location and free-text description.</small></span></label>
+              <textarea id="osseousDescription" rows="3" placeholder="Location and fracture description…" hidden></textarea>
+            </div>
+          </section>
+          <section class="workspace-card" aria-labelledby="notesHeading">
+            <div class="section-heading"><div><p class="section-kicker">Narrative</p><h2 id="notesHeading">Notes and recommendations</h2></div></div>
+            <div class="stack-form compact">
+              <label>Incidental findings<textarea id="incidentalFindings" rows="3" placeholder="Optional"></textarea></label>
+              <label>Other abnormal findings<textarea id="otherAbnormalFindings" rows="3" placeholder="Optional"></textarea></label>
+              <label>Recommendations<textarea id="recommendations" rows="3" placeholder="Optional; no recommendations are generated automatically"></textarea></label>
+              <label class="toggle-row"><input id="additionalImagingToggle" type="checkbox"><span><strong>Additional imaging required</strong><small>Reveal a free-text request and reason.</small></span></label>
+              <textarea id="additionalImagingText" rows="3" placeholder="Requested modality/modalities, reason, and instructions…" hidden></textarea>
+            </div>
+          </section>
+        </div>
+
+        <section class="workspace-card review-panel" data-workspace-step="6" hidden>
+          <div class="section-heading"><div><p class="section-kicker">Verify before finalization</p><h2>Examination review</h2></div></div>
+          <div id="reviewSummary" class="review-summary"></div>
+        </section>
+
+        <section class="workspace-card pdf-panel" data-workspace-step="7" hidden>
+          <div class="section-heading"><div><p class="section-kicker">Final document</p><h2>Preview and PDF</h2></div></div>
+          <p>Preview the exact A4 document, then finalize and download the report. Empty sections are omitted automatically.</p>
+        </section>
+
+        <footer class="action-bar">
+          <label class="checkbox-inline"><input id="includeRadiographs" type="checkbox"> Include radiographs in PDF</label>
+          <div class="action-bar-buttons">
+            <button id="workspacePreviousButton" class="button button--quiet" type="button">← Previous</button>
+            <button id="saveDraftButton" class="button button--quiet" type="button">Save draft</button>
+            <button id="workspaceNextButton" class="button button--secondary" type="button">Next →</button>
+            <button id="previewButton" class="button button--secondary pdf-action" type="button" hidden>Preview report</button>
+            <button id="downloadButton" class="button button--primary pdf-action" type="button" hidden>Finalize &amp; download PDF</button>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="previewDialog" class="preview-dialog">
+    <div class="dialog-header"><div><p class="eyebrow">Accurate A4 preview</p><h2 id="previewDialogTitle">Diagnostic Imaging Report</h2></div><button id="closePreviewButton" class="icon-button" type="button" aria-label="Close preview">×</button></div>
+    <iframe id="previewFrame" title="Report PDF preview"></iframe>
+  </dialog>
+
+  <dialog id="chartConfigDialog" class="config-dialog">
+    <div class="dialog-header"><div><p class="eyebrow">Editable dentition</p><h2>Configure displayed teeth</h2></div><button id="closeChartConfigButton" class="icon-button" type="button" aria-label="Close tooth configuration">×</button></div>
+    <p class="config-intro">Showing or hiding a tooth does not create a “missing tooth” finding. Eruption status is descriptive and never inferred from age.</p>
+    <div id="chartConfigList" class="chart-config-list"></div>
+    <div class="dialog-actions"><button id="doneChartConfigButton" class="button button--primary" type="button">Done</button></div>
+  </dialog>
+
+  <script type="module" src="/app.js?v=5"></script>
+</body>
+</html>
