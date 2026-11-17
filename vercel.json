@@ -3,7 +3,7 @@
   "framework": null,
   "functions": {
     "server.js": {
-      "includeFiles": ["public/**"],
+      "includeFiles": "public/**",
       "maxDuration": 60
     }
   }
