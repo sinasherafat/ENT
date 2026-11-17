@@ -110,11 +110,12 @@ class BlobStore {
   }
 
   async read() {
-    const { get } = await this.sdk();
+    const { get, head } = await this.sdk();
     const result = await get(this.pathname, { access: 'private', useCache: false });
     if (!result || result.statusCode !== 200 || !result.stream) return { state: initialState(), etag: null };
     const text = await new Response(result.stream).text();
-    return { state: { ...initialState(), ...JSON.parse(text) }, etag: result.blob.etag };
+    const metadata = await head(this.pathname);
+    return { state: { ...initialState(), ...JSON.parse(text) }, etag: metadata.etag };
   }
 
   async mutate(mutator) {
