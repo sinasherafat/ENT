@@ -132,15 +132,22 @@ class BlobStore {
         return result;
       } catch (error) {
         if (!/Precondition|already exists|412|conflict/i.test(`${error?.name || ''} ${error?.message || ''}`) || attempt === 5) throw error;
+        await new Promise((resolve) => setTimeout(resolve, 40 * (attempt + 1)));
       }
     }
     throw new Error('Persistent state could not be updated.');
   }
 
   async initialize(username, password) {
+    const snapshot = (await this.read()).state;
+    const now = new Date().toISOString();
+    const hasExpiredSessions = (snapshot.sessions || []).some((session) => session.expires_at <= now);
+    const needsAdmin = !snapshot.users.length && username && password?.length >= 12;
+    if (!hasExpiredSessions && !needsAdmin) return;
+
     await this.mutate((state) => {
       state.settings = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
-      state.sessions = (state.sessions || []).filter((session) => session.expires_at > new Date().toISOString());
+      state.sessions = (state.sessions || []).filter((session) => session.expires_at > now);
       if (!state.users.length && username && password?.length >= 12) {
         const { salt, hash } = hashPassword(password);
         state.users.push({ id: state.nextUserId++, username: username.trim(), password_hash: hash, password_salt: salt, created_at: new Date().toISOString() });
